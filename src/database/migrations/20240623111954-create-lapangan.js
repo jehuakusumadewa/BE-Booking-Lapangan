@@ -9,9 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_lapangan: {
-        type: Sequelize.INTEGER
-      },
       nama_owner: {
         type: Sequelize.STRING
       },

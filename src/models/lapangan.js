@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   lapangan.init({
-    id_lapangan: DataTypes.INTEGER,
     nama_owner: DataTypes.STRING,
     nama_lapangan: DataTypes.STRING,
     tipe_lapangan: DataTypes.STRING,

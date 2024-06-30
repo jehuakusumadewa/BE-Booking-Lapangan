@@ -15,7 +15,7 @@ module.exports = {
       tanggal_booking: {
         type: Sequelize.DATE
       },
-      id_booking: {
+      id_lapangan: {
         type: Sequelize.INTEGER
       },
       nama_team: {
