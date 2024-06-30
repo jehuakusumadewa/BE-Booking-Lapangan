@@ -9,11 +9,13 @@ const express = require("express");
 const app = express();
 const loginRouter = require('./src/routes/auth.route.js');
 const rekeningRouter = require('./src/routes/rekening.route.js');
+const bookingRouter = require('./src/routes/booking.route.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/auth", loginRouter);
 app.use("/rekening", rekeningRouter);
+app.use("/booking", bookingRouter);
 
 
 

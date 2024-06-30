@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { createRekening } = require('../controllers/rekening.controllers');
+const { createRekening } = require('../controllers/rekening.controller');
 
 router.post("/create", createRekening);
 
