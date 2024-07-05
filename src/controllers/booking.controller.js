@@ -74,8 +74,44 @@ const getById = async (req, res) => {
         });
     }
 }
+
+const deleteById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const response = await bookingModel.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (!response) {
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: `data not found`
+                }
+            )
+        }
+
+        await response.destroy();
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: `delete successfully`
+            }
+        )
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
 module.exports = {
     createBooking,
     getAll,
-    getById
+    getById,
+    deleteById
 }

@@ -10,7 +10,8 @@ const app = express();
 const loginRouter = require('./src/routes/auth.route.js');
 const rekeningRouter = require('./src/routes/rekening.route.js');
 const bookingRouter = require('./src/routes/booking.route.js');
-const lapanganRouter = require('./src/routes/lapangan.route.js')
+const lapanganRouter = require('./src/routes/lapangan.route.js');
+const userRouter = require('./src/routes/user.route.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,7 +19,7 @@ app.use("/auth", loginRouter);
 app.use("/rekening", rekeningRouter);
 app.use("/booking", bookingRouter);
 app.use("/lapangan", lapanganRouter);
-
+app.use("/user", userRouter);
 
 
 

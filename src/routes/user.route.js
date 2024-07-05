@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const { createRekening, getAll, getById, deleteById } = require('../controllers/rekening.controller');
+const { getAll, getById, deleteById, updateById } = require('../controllers/user.controller');
 
-router.post("/create", createRekening);
 router.get("/data", getAll);
 router.get("/data/:id", getById);
 router.delete("/data/:id", deleteById);
+router.patch("/update/:id", updateById)
 
 module.exports = router;
