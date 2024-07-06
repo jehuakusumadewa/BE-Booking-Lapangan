@@ -1,5 +1,7 @@
 const path = require("path");
 
+const fileUpload = require("express-fileupload")
+
 require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
 const express = require("express");
@@ -15,6 +17,8 @@ const userRouter = require('./src/routes/user.route.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(fileUpload());
+app.use(express.static("public"));
 app.use("/auth", loginRouter);
 app.use("/rekening", rekeningRouter);
 app.use("/booking", bookingRouter);

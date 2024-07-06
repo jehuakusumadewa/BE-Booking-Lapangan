@@ -1,4 +1,5 @@
-const { rekening: rekeningModels } = require('../models');
+const { where } = require('sequelize')
+const { rekening: rekeningModels, sequelize } = require('../models');
 
 const createRekening = async (req, res, next) => {
     const { nama_bank, cabang_bank, kota_kabupaten, nama, no_rekening, atas_nama } = req.body;
@@ -103,10 +104,49 @@ const deleteById = async (req, res) => {
         });
     }
 }
+const updateRekening = async (req, res) => {
+    const { id } = req.params;
+    const { nama_bank, cabang_bank, kota_kabupaten, nama, no_rekening, atas_nama } = req.body;
+
+    try {
+        const response = await rekeningModels.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (!response) {
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: `data not found`
+                }
+            )
+        }
+
+        await response.update({
+
+            nama_bank, cabang_bank, kota_kabupaten, nama, no_rekening, atas_nama
+        })
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: `update rekening successfully`
+            }
+        )
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
 
 module.exports = {
     createRekening,
     getAll,
     getById,
-    deleteById
+    deleteById,
+    updateRekening
 }

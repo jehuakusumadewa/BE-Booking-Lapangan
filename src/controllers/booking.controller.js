@@ -109,9 +109,48 @@ const deleteById = async (req, res) => {
         });
     }
 }
+const updateBooking = async (req, res) => {
+    const { id } = req.params;
+    const { tanggal_main, tanggal_booking, id_lapangan, nama_team, jam_booking_mulai, jam_booking_akhir, kategori, bukti, no_wa, nama_owner } = req.body;
+
+    try {
+        const response = await bookingModel.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (!response) {
+            return res.status(404).json(
+                {
+                    success: false,
+                    message: `data not found`
+                }
+            )
+        }
+
+        await response.update({
+
+            tanggal_main, tanggal_booking, id_lapangan, nama_team, jam_booking_mulai, jam_booking_akhir, kategori, bukti, no_wa, nama_owner
+        })
+
+        return res.status(200).json(
+            {
+                success: true,
+                message: `update booking successfully`
+            }
+        )
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
 module.exports = {
     createBooking,
     getAll,
     getById,
-    deleteById
+    deleteById,
+    updateBooking
 }

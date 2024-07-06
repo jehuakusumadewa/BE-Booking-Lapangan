@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const { user: userModels } = require('../models');
 
 // const createUser = async (req, res, next) => {
@@ -102,10 +103,13 @@ const deleteById = async (req, res) => {
 
 const updateById = async (req, res) => {
     const { id } = req.params;
+    const { nama, username, level } = req.body;
 
     try {
         const response = await userModels.findOne({
-
+            where: {
+                id: id
+            }
         });
 
         if (!response) {
@@ -116,6 +120,11 @@ const updateById = async (req, res) => {
                 }
             )
         }
+
+        await response.update({
+
+            nama, username, level
+        })
 
         return res.status(200).json(
             {

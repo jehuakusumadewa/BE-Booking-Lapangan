@@ -2,11 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
-const { createRekening, getAll, getById, deleteById } = require('../controllers/rekening.controller');
+const { createRekening, getAll, getById, deleteById, updateRekening } = require('../controllers/rekening.controller');
 
-router.post("/create", createRekening);
-router.get("/data", getAll);
-router.get("/data/:id", getById);
-router.delete("/data/:id", deleteById);
+const { validateToken } = require('../middlewares/auth.js')
+
+router.post("/create", validateToken, createRekening);
+router.get("/data", validateToken, getAll);
+router.get("/data/:id", validateToken, getById);
+router.delete("/data/:id", validateToken, deleteById);
+router.patch("/data/:id", validateToken, updateRekening)
 
 module.exports = router;
