@@ -6,6 +6,8 @@ require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
 const express = require("express");
 
+const cors = require('cors')
+
 
 
 const app = express();
@@ -14,6 +16,11 @@ const rekeningRouter = require('./src/routes/rekening.route.js');
 const bookingRouter = require('./src/routes/booking.route.js');
 const lapanganRouter = require('./src/routes/lapangan.route.js');
 const userRouter = require('./src/routes/user.route.js');
+
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
